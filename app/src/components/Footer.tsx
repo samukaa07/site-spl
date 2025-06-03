@@ -17,16 +17,34 @@ const Footer: React.FC = () => {
               Transformando ideias em experiências digitais impactantes desde 2015.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Facebook">
+              <a 
+                href="https://www.facebook.com/samuel.lima.695836" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-400 hover:text-white transition-colors" 
+                aria-label="Facebook"
+              >
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Instagram">
+              <a 
+                  href="https://www.instagram.com/spl_informatica?igsh=MWhtdDE0aThmbGF5eQ%3D%3D&utm_source=qr" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-400 hover:text-white transition-colors" 
+                  aria-label="Instagram"
+                >
                 <Instagram size={20} />
               </a>
               <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="Twitter">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors" aria-label="LinkedIn">
+              <a 
+                href="https://www.linkedin.com/in/samuel-pereira-lima-a84bb871/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-400 hover:text-white transition-colors" 
+                aria-label="LinkedIn"
+              >
                 <Linkedin size={20} />
               </a>
             </div>
@@ -77,7 +95,9 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm mb-4 md:mb-0">
-              &copy; {currentYear} SPL Informática. Todos os direitos reservados.
+              <p className="text-gray-500 text-sm">CNPJ: 51.656.679/0001-02</p>
+              <p className="text-gray-500 text-sm"></p>
+              &copy; {currentYear} Samuel Pereira Lima - SPL Informática. Este site é protegido por direitos autorais. Cópia total ou parcial é proibida sem autorização.
             </p>
             <div className="flex space-x-6">
               <a href="#" className="text-gray-500 hover:text-white text-sm transition-colors">Termos de Uso</a>

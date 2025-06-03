@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, User  } from 'lucide-react';
 import SectionTitle from './ui/SectionTitle';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -11,24 +12,59 @@ const Contact: React.FC = () => {
     message: ''
   });
 
+  const formatPhone = (value: string) => {
+  const cleaned = value.replace(/\D/g, '');
+
+  if (cleaned.length <= 10) {
+    return cleaned.replace(/^(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+  } else {
+    return cleaned.replace(/^(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+  }
+};
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+    setFormData(prev => ({
+    ...prev,
+    [name]: name === 'phone' ? formatPhone(value) : value
+  }));
+};
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real implementation, you would send this data to a server
-    console.log('Form submitted:', formData);
-    alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
+  e.preventDefault();
+
+  const serviceId = 'splinformatica';
+  const templateId = 'template_l1x01u8';          // envia para você
+  const clientTemplateId = 'template_0pjmzbu';    // envia para o cliente
+  const publicKey = 'LgkzrK1yvaGQUp81K';
+
+  const templateParams = {
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    subject: formData.subject,
+    message: formData.message
   };
+
+  emailjs.send(serviceId, templateId, templateParams, publicKey)
+    .then(() => {
+      // Envia confirmação automática para o cliente
+      emailjs.send(serviceId, clientTemplateId, templateParams, publicKey);
+
+      alert('Mensagem enviada com sucesso!');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    })
+    .catch((error) => {
+      console.error('Erro ao enviar:', error);
+      alert('Erro ao enviar a mensagem. Tente novamente.');
+    });
+};
 
   return (
     <section id="contact" className="py-20">
@@ -103,11 +139,11 @@ const Contact: React.FC = () => {
                     required
                   >
                     <option value="">Selecione uma opção</option>
-                    <option value="website">Site institucional</option>
-                    <option value="ecommerce">E-commerce</option>
-                    <option value="landing">Landing page</option>
-                    <option value="system">Sistema web</option>
-                    <option value="other">Outro</option>
+                    <option value="Site institucional">Site institucional</option>
+                    <option value="E-commerce">E-commerce</option>
+                    <option value="Landing page">Landing page</option>
+                    <option value="Sistema web">Sistema web</option>
+                    <option value="Outro">Outro</option>
                   </select>
                 </div>
               </div>
@@ -141,6 +177,13 @@ const Contact: React.FC = () => {
             <h3 className="text-2xl font-bold mb-6 text-blue-900">Informações de contato</h3>
             
             <div className="bg-gradient-to-br from-blue-800 to-blue-900 text-white rounded-lg shadow-lg p-8 h-full">
+              <div className="flex items-start mb-8">
+                <User className="h-6 w-6 text-blue-300 mr-4 mt-1 flex-shrink-0" />
+                <div>
+                  <h4 className="font-bold text-lg mb-1">Responsável</h4>
+                  <p className="text-blue-100">Samuel Pereira Lima</p>
+                </div>
+              </div>
               <div className="flex items-start mb-8">
                 <Phone className="h-6 w-6 text-blue-300 mr-4 mt-1 flex-shrink-0" />
                 <div>

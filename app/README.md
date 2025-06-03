@@ -107,4 +107,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 Samuel Pereira Lima - [splinformatica1@gmail.com](mailto:splinformatica1@gmail.com)
 
 ---
-Desenvolvido por [SPL Informática](https://splinformatica.com.br)
+Desenvolvido por [SPL Informática](https://splinformatica.vercel.app)
